@@ -40,6 +40,11 @@ describe('mysql', function () {
     shared.basictest(si, done);
   });
 
+  it('sql', function (done) {
+    testcount++;
+    shared.sqltest(si, done);
+  });
+
   it('extra', function (done) {
     testcount++;
     extra.test(si, done);
