@@ -130,6 +130,22 @@ function extendTest (settings) {
             })
           },
 
+          ne: function (next) {
+            var foo = si.make('foo')
+            foo.p1 = 'test'
+
+            foo.save$(function (err, foo1) {
+              Assert(!err)
+
+              foo1.list$({p1: {ne$: 'v2'}}, function (err, lst) {
+                Assert(!err)
+                Assert.equal(1, lst.length)
+                Assert.equal(lst[0].p1, 'test')
+                next()
+              })
+            })
+          },
+
           reportAllErrors: function (next) {
             var foo = si.make('foo')
             foo.missing_attribute = 'v1'

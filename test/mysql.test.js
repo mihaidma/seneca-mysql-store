@@ -37,7 +37,10 @@ var si = Seneca({
 describe('MySQL suite tests ', function () {
   before({}, function (done) {
     si.use(require('../mysql-store.js'), dbConfig)
-    si.ready(done)
+    si.ready(function () {
+      si.use(require('seneca-store-query'))
+      si.ready(done)
+    })
   })
 
   Shared.basictest({
@@ -66,6 +69,7 @@ describe('MySQL suite tests ', function () {
   })
 })
 
+
 var incrementConfig = _.assign({}, dbConfig, {
   map: {'-/-/incremental': '*'},
   auto_increment: true
@@ -88,3 +92,4 @@ describe('MySQL autoincrement tests ', function () {
     script: lab
   })
 })
+
